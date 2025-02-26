@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <script src="script.js" defer></script>
+    <title>check-code</title>
+
+</head>
+
+<body>
+
+
+<!-- 
+<div class="check-code">
+    <p>Please enter your email adress to receive a verification code.</p>
+     <button class="x"><img src="images/Icon set (10).svg" alt=""></button> 
+
+
+
+    <div id="countdown">02:00</div>
+    <script>
+        let timeLeft = 120; 
+        let countdownElement = document.getElementById("countdown");
+    
+        function updateCountdown() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+    
+           
+            let formattedTime = 
+                (minutes < 10 ? "0" : "") + minutes + ":" + 
+                (seconds < 10 ? "0" : "") + seconds;
+    
+            countdownElement.innerText = formattedTime;
+    
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownElement.innerText = "Time is over!";
+            }
+        }
+    
+        updateCountdown(); 
+    </script>
+    
+
+    <div class="otp-container">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 0)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 1)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 2)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 3)">
+    </div>
+    
+    <div class="check-code-buttons">
+         <button class="resendBtn">Resend</button>
+        <button class="confirmBtn">Confirm</button>
+    </div>
+
+
+ <script>
+    function moveToNext(input, index) {
+        let boxes = document.querySelectorAll(".otp-box");
+
+        
+        if (input.value) {
+            input.classList.add("filled");
+        } else {
+            input.classList.remove("filled");
+        }
+
+        
+        if (input.value && index < boxes.length - 1) {
+            boxes[index + 1].focus();
+        }
+
+       
+        checkOTPBoxes();
+    }
+
+    function checkOTPBoxes() {
+        let boxes = document.querySelectorAll(".otp-box");
+        let confirmBtn = document.querySelector(".confirmBtn");
+
+       
+        let allFilled = Array.from(boxes).every(box => box.value.trim() !== "");
+
+        if (allFilled) {
+            confirmBtn.classList.add("active"); 
+        } else {
+            confirmBtn.classList.remove("active"); 
+        }
+    }
+</script>
+
+  -->
+  <div class="check-code">
+    <p>Please enter your email address to receive a verification code.</p>
+    <button class="x"><img src="images/Icon set (10).svg" alt=""></button> 
+
+    <div id="countdown">02:00</div>
+
+    <div class="otp-container">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 0)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 1)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 2)">
+        <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 3)">
+    </div>
+
+    <div class="check-code-buttons">
+         <button class="resendBtn">Resend</button>
+         <button class="confirmBtn" disabled>Confirm</button>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        let timeLeft = 120; 
+        let countdownElement = document.getElementById("countdown");
+        let otpBoxes = document.querySelectorAll(".otp-box");
+        let confirmBtn = document.querySelector(".confirmBtn");
+
+        function updateCountdown() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+
+            let formattedTime = 
+                (minutes < 10 ? "0" : "") + minutes + ":" + 
+                (seconds < 10 ? "0" : "") + seconds;
+
+            countdownElement.innerText = formattedTime;
+
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownElement.innerText = "Time is over!";
+                
+               
+                otpBoxes.forEach(box => box.disabled = true);
+                
+               
+                confirmBtn.classList.remove("active");
+                confirmBtn.disabled = true;
+            }
+        }
+
+        updateCountdown(); 
+
+        function moveToNext(input, index) {
+            let boxes = document.querySelectorAll(".otp-box");
+
+            if (input.value) {
+                input.classList.add("filled");
+            } else {
+                input.classList.remove("filled");
+            }
+
+            if (input.value && index < boxes.length - 1) {
+                boxes[index + 1].focus();
+            }
+
+            checkOTPBoxes();
+        }
+
+        function checkOTPBoxes() {
+            let boxes = document.querySelectorAll(".otp-box");
+            let confirmBtn = document.querySelector(".confirmBtn");
+
+            let allFilled = Array.from(boxes).every(box => box.value.trim() !== "");
+
+            if (allFilled) {
+                confirmBtn.classList.add("active"); 
+                confirmBtn.disabled = false;
+            } else {
+                confirmBtn.classList.remove("active"); 
+                confirmBtn.disabled = true;
+            }
+        }
+
+        window.moveToNext = moveToNext;
+    };
+</script>
+
+</div>
+</body>
+</html>
